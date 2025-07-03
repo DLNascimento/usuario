@@ -18,6 +18,7 @@ public class UsuarioService {
     private final PasswordEncoder passwordEncoder;
 
     public UsuarioDTO salvaUsuario(UsuarioDTO usuarioDTO) {
+        System.out.println("SENHA RECEBIDA: " + usuarioDTO.getSenha());
         emailExiste(usuarioDTO.getEmail());
         usuarioDTO.setSenha(passwordEncoder.encode(usuarioDTO.getSenha()));
         Usuario usuario = usuarioConverter.paraUsuario(usuarioDTO);
