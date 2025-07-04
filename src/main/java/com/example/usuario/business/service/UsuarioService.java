@@ -4,6 +4,7 @@ import com.example.usuario.business.converter.UsuarioConverter;
 import com.example.usuario.business.dto.UsuarioDTO;
 import com.example.usuario.infrastructure.entity.Usuario;
 import com.example.usuario.infrastructure.exception.ConflictException;
+import com.example.usuario.infrastructure.exception.ResourceNotFound;
 import com.example.usuario.infrastructure.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -45,4 +46,11 @@ public class UsuarioService {
         return usuarioRepository.existsByEmail(email);
 
     }
+
+    public Usuario buscarUsuario(String email){
+        return usuarioRepository.findByEmail(email).
+                orElseThrow(() -> new ResourceNotFound("Email não encontrado " + email));
+    }
+
+
 }

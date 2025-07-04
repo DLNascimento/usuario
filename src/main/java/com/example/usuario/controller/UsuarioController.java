@@ -2,6 +2,7 @@ package com.example.usuario.controller;
 
 import com.example.usuario.business.dto.UsuarioDTO;
 import com.example.usuario.business.service.UsuarioService;
+import com.example.usuario.infrastructure.entity.Usuario;
 import com.example.usuario.infrastructure.security.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -35,6 +36,11 @@ public class UsuarioController {
                 (new UsernamePasswordAuthenticationToken(usuarioDTO.getEmail(),
                         usuarioDTO.getSenha()));
         return "Bearer " + jwtUtil.generateToken(authentication.getName());
+    }
+
+    @GetMapping
+    public ResponseEntity<Usuario> buscarUsuario(@RequestParam("email") String email) {
+        return ResponseEntity.ok(usuarioService.buscarUsuario(email));
     }
 
 
