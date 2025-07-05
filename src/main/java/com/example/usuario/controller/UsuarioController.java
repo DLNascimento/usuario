@@ -4,7 +4,6 @@ import com.example.usuario.business.dto.EnderecoDTO;
 import com.example.usuario.business.dto.TelefoneDTO;
 import com.example.usuario.business.dto.UsuarioDTO;
 import com.example.usuario.business.service.UsuarioService;
-import com.example.usuario.infrastructure.entity.Usuario;
 import com.example.usuario.infrastructure.security.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -42,9 +41,17 @@ public class UsuarioController {
 
     @PostMapping("/endereco")
     public ResponseEntity<EnderecoDTO> novoEndereco(@RequestBody EnderecoDTO dto,
-                                                    @RequestHeader("Authorization") String token){
+                                                    @RequestHeader("Authorization") String token) {
         return ResponseEntity.ok(usuarioService.cadastroNovoEndereco(token, dto));
     }
+
+    @PostMapping("/telefone")
+    public ResponseEntity<TelefoneDTO> novoTelefone(@RequestBody TelefoneDTO dto,
+                                                    @RequestHeader("Authorization") String token) {
+        return ResponseEntity.ok(usuarioService.cadastroNovoTelefone(token, dto));
+
+    }
+
 
     @GetMapping
     public ResponseEntity<UsuarioDTO> buscarUsuario(@RequestParam("email") String email) {
