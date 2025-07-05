@@ -149,5 +149,13 @@ public class UsuarioConverter {
                 .build();
     }
 
+    public Telefone paraTelefoneEntity(TelefoneDTO dto, Long idUsuario) {
+        return Telefone.builder()
+
+                .usuario_id(idUsuario)
+                .numero(dto.getNumero())
+                .build();
+    }
+
 
 }
