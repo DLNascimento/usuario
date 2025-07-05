@@ -114,7 +114,7 @@ public class UsuarioConverter {
 
     }
 
-    public Endereco atualizaEndereco(EnderecoDTO dto, Endereco entity){
+    public Endereco atualizaEndereco(EnderecoDTO dto, Endereco entity) {
 
         return Endereco.builder()
                 .id(entity.getId())
@@ -127,11 +127,25 @@ public class UsuarioConverter {
                 .build();
     }
 
-    public Telefone atualizaTelefone(TelefoneDTO dto, Telefone entity){
+    public Telefone atualizaTelefone(TelefoneDTO dto, Telefone entity) {
 
         return Telefone.builder()
                 .id(entity.getId())
                 .numero(dto.getNumero() != null ? dto.getNumero() : entity.getNumero())
+                .build();
+    }
+
+    public Endereco paraEnderecoEntity(EnderecoDTO dto, Long idUsuario) {
+        return Endereco.builder()
+
+                .usuario_id(idUsuario)
+                .rua(dto.getRua())
+                .numero(dto.getNumero())
+                .complemento(dto.getComplemento())
+                .cidade(dto.getCidade())
+                .estado(dto.getEstado())
+                .cep(dto.getCep())
+
                 .build();
     }
 

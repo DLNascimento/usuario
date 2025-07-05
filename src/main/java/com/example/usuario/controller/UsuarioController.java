@@ -40,6 +40,12 @@ public class UsuarioController {
         return "Bearer " + jwtUtil.generateToken(authentication.getName());
     }
 
+    @PostMapping("/endereco")
+    public ResponseEntity<EnderecoDTO> novoEndereco(@RequestBody EnderecoDTO dto,
+                                                    @RequestHeader("Authorization") String token){
+        return ResponseEntity.ok(usuarioService.cadastroNovoEndereco(token, dto));
+    }
+
     @GetMapping
     public ResponseEntity<UsuarioDTO> buscarUsuario(@RequestParam("email") String email) {
         return ResponseEntity.ok(usuarioService.buscarUsuario(email));

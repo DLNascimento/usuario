@@ -19,4 +19,7 @@ public class Telefone {
     @Column(name = "numero", length = 15)
     private Long numero;
 
+    @Column(name = "usuario_id")
+    private Long usuario_id;
+
 }
