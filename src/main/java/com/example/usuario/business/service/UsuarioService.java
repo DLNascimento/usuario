@@ -105,12 +105,23 @@ public class UsuarioService {
 
     }
 
-    public TelefoneDTO atualizaDadosTelefone(Long idTelefone, TelefoneDTO dto){
+    public TelefoneDTO atualizaDadosTelefone(Long idTelefone, TelefoneDTO dto) {
 
         Telefone entity = telefoneRepository.findById(idTelefone).
                 orElseThrow(() -> new ResourceNotFound("Id não encontrado" + idTelefone));
         Telefone telefone = usuarioConverter.atualizaTelefone(dto, entity);
         return usuarioConverter.paraTelefoneDTO(telefoneRepository.save(telefone));
+    }
+
+    public EnderecoDTO cadastroNovoEndereco(String token, EnderecoDTO dto) {
+
+        String email = jwtUtil.extractUsername(token.substring(7));
+        Usuario usuario = usuarioRepository.findByEmail(email).
+                orElseThrow(() -> new ResourceNotFound(
+                        "Email não encontrado " + email));
+        Endereco enderecoEntity = usuarioConverter.paraEnderecoEntity(dto, usuario.getId());
+        Endereco endereco = enderecoRepository.save(enderecoEntity);
+        return usuarioConverter.paraEnderecoDTO(endereco);
     }
 
 }
